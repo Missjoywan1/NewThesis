@@ -1,0 +1,16 @@
+Conversion of SDL to PR started
+Conversion to PR completed
+Syntactic analysis started
+Syntactic analysis completed
+Semantic analysis started
+
+#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy,4,1,8)
+ERROR 266 System definition must contain at least one block or process definition
+Semantic analysis completed
+
+
+--------------------------------------------------
+
+Number of errors: 1
+
+INFO 278 Analyzer command could not be fully performed

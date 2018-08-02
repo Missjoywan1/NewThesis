@@ -1,0 +1,39 @@
+
+
+***********************************************************************
+**  PACKAGE Predefined
+**  #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,10,9)
+***********************************************************************
+2  NEWTYPE Boolean            #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,12,10)
+2  NEWTYPE Character          #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,23,9)
+2  NEWTYPE Charstring         #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,81,9)
+2  NEWTYPE Integer            #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,115,9)
+2  NEWTYPE Real               #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,144,9)
+2  NEWTYPE Pid                #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,212,9)
+2  NEWTYPE Duration           #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,218,9)
+2  NEWTYPE Time               #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,234,9)
+2  NEWTYPE Bit                #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,248,9)
+2  NEWTYPE Bit_string         #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,258,9)
+2  NEWTYPE Octet              #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,279,9)
+2  NEWTYPE Octet_string       #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,310,9)
+2  NEWTYPE NULL               #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,328,9)
+2  NEWTYPE Object_identifier  #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,332,9)
+2  NEWTYPE Any_type           #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,347,9)
+2  SYNTYPE IA5String          #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,96,3)
+2  SYNTYPE NumericString      #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,101,3)
+2  SYNTYPE PrintableString    #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,106,3)
+2  SYNTYPE VisibleString      #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,111,3)
+2  SYNTYPE Natural            #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,142,9)
+2  GENERATOR String           #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,66,11)
+2  GENERATOR Array            #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,162,11)
+2  GENERATOR Powerset         #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,169,11)
+2  GENERATOR Bag              #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,190,11)
+2  GENERATOR Own              #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,350,11)
+2  GENERATOR Oref             #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,360,11)
+2  SYNONYM PLUS_INFINITY      #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,159,9)
+2  SYNONYM MINUS_INFINITY     #SDTREF(TEXT,C:\IBM\Rational\SDL_TTCN_Suite6.3\sdt\sdtdir\wini386\predef.sdl,160,9)
+
+***********************************************************************
+**  SYSTEM UnderwaterProtocol
+**  #SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy,4,1,8)
+***********************************************************************

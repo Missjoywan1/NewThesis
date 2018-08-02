@@ -1,0 +1,167 @@
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy,4)*/
+system UnderwaterProtocol;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy,1)*/
+/*#CODE
+#HEADING
+#include 'random.pr'
+#include <stdio.h>*/
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),203(65,25))*/
+SIGNAL sStart;
+SIGNAL AckMsg (Response), BcReq (Req), BcReq2 (Req2);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),194(50,60))*/
+/*Maximum number of nodes to sync*/
+SYNONYM No_Nodes NATURAL = 100;
+
+/*Structure of Time*/
+NEWTYPE TimePrint
+  STRUCT
+    hrs      INTEGER;
+    mins    INTEGER;
+    secs    INTEGER;
+ENDNEWTYPE TimePrint;
+
+/*NodeId Number*/
+SYNTYPE NodeId = PID
+ENDSYNTYPE NodeId;
+
+NEWTYPE Req
+  STRUCT
+    num   NodeId;
+    zeit    TimePrint; 
+ENDNEWTYPE Req;
+
+NEWTYPE Req2
+  STRUCT
+    num   NodeId;
+    zeit    TimePrint;
+    mask  MaskID; 
+ENDNEWTYPE Req2;
+
+NEWTYPE Response
+  STRUCT
+    numb     NodeId;
+    zeite      TimePrint; 
+ENDNEWTYPE Response;
+
+SYNTYPE Distance = NATURAL
+  CONSTANTS 0:1000
+ENDSYNTYPE;
+
+SYNTYPE TimeRand = NATURAL
+  CONSTANTS 0:10
+ENDSYNTYPE;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),275(77,45))*/
+channel /*#E*/ 
+Envi from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),104(15,15))*/
+env to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),122(135,40))*/
+Master_Node with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),276(46,55))*/
+sStart;
+endchannel Envi;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),158(149,84))*/
+channel /*#E*/ 
+C1 from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),122(135,40))*/
+Master_Node to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),125(130,125))*/
+SeveralNodes with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),159(150,116))*/
+BcReq,
+BcReq2;
+from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),125(130,125))*/
+SeveralNodes to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),122(135,40))*/
+Master_Node with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),160(150,66))*/
+AckMsg;
+endchannel C1;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),122(135,40))*/
+block /*#E*/ 
+Master_Node referenced;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),125(130,125))*/
+block /*#E*/ 
+SeveralNodes referenced;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy,4)*/
+endsystem UnderwaterProtocol;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk,4)*/
+block SeveralNodes;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),140(75,25))*/
+SYNONYM No_Nodes NATURAL = 100;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),119(32,72))*/
+signalroute /*#E*/ 
+ManyNodesSide from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),116(70,70))*/
+ManyNodes to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),104(15,15))*/
+env with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),120(17,82))*/
+AckMsg;
+from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),104(15,15))*/
+env to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),116(70,70))*/
+ManyNodes with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),121(57,82))*/
+BcReq,
+BcReq2;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),116(70,70))*/
+process /*#E*/ 
+ManyNodes (1,No_Nodes) referenced;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),125(7,77))*/
+connect /*#E*/ 
+C1 and 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),119(32,72))*/
+ManyNodesSide;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk,4)*/
+endblock SeveralNodes;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr,4)*/
+process ManyNodes;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),128(55,5))*/
+DCL 
+respMsg       Response,
+paramReq     Req,
+paramReq2   Req2;
+
+TIMER T2;
+
+SYNONYM dur duration = 4;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),155(5,40))*/
+start /*#E*/ 
+;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),158(5,55))*/
+nextstate /*#E*/ 
+READY;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),119(50,40))*/
+state /*#E*/ 
+READY;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),131(40,55))*/
+input /*#E*/ 
+BcReq(paramReq);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),182(40,70))*/
+task /*#E*/ 
+respMsg!numb := SELF;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),188(40,85))*/
+task /*#E*/ 
+respMsg!zeite!hrs    := 0:23,
+respMsg!zeite!mins   := 0:59,
+respMsg!zeite!secs    := 0:59;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),194(35,100))*/
+output /*#E*/ 
+AckMsg (respMsg) to PARENT;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),170(45,115))*/
+/*#E*/ 
+SET (NOW+dur, T2);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),149(50,135))*/
+nextstate /*#E*/ 
+WARTE;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),176(115,55))*/
+input /*#E*/ 
+BcReq2(paramReq2);
+***** Unexpected end of flow *****
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),119(50,40))*/
+endstate;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr,4)*/
+endprocess ManyNodes;

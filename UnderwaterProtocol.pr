@@ -1,0 +1,364 @@
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy,4)*/
+system UnderwaterProtocol;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy,1)*/
+/*#CODE
+#HEADING
+#include 'random.pr'
+#include <stdio.h>*/
+/*#include 'file.pr' */
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),203(65,25))*/
+SIGNAL sStart;
+SIGNAL AckMsg (Response), BcReq (Req), BcReq2 (Req2);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),194(55,55))*/
+/*Maximum number of nodes to sync*/
+SYNONYM No_Nodes NATURAL = 100;
+
+/*Structure of Time*/
+NEWTYPE TimePrint
+  STRUCT
+    hrs      INTEGER;
+    mins    INTEGER;
+    secs    INTEGER;
+ENDNEWTYPE TimePrint;
+
+/*NodeId Number*/
+SYNTYPE NodeId = PID
+ENDSYNTYPE NodeId;
+
+SYNTYPE MASKID = PID
+ENDSYNTYPE MASKID;
+
+NEWTYPE Req
+  STRUCT
+    num   NodeId;
+    zeit    TimePrint; 
+ENDNEWTYPE Req;
+
+NEWTYPE Req2
+  STRUCT
+    numbe   NodeId;
+    zeiten    TimePrint;
+    mask      MaskID; 
+ENDNEWTYPE Req2;
+
+NEWTYPE Response
+  STRUCT
+    numb     NodeId;
+    zeite      TimePrint; 
+ENDNEWTYPE Response;
+
+NEWTYPE Response2
+  STRUCT
+    number     NodeId;
+    zeitene      TimePrint; 
+ENDNEWTYPE Response2;
+
+SYNTYPE Distance = NATURAL
+  CONSTANTS 0:7500
+ENDSYNTYPE;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),275(77,45))*/
+channel /*#E*/ 
+Envi from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),104(15,15))*/
+env to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),122(135,40))*/
+Master_Node with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),276(46,55))*/
+sStart;
+endchannel Envi;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),158(149,84))*/
+channel /*#E*/ 
+C1 from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),122(135,40))*/
+Master_Node to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),125(130,125))*/
+SeveralNodes with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),159(150,116))*/
+BcReq,
+BcReq2;
+from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),125(130,125))*/
+SeveralNodes to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),122(135,40))*/
+Master_Node with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),160(150,66))*/
+AckMsg;
+endchannel C1;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),122(135,40))*/
+block /*#E*/ 
+Master_Node referenced;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy(1),125(130,125))*/
+block /*#E*/ 
+SeveralNodes referenced;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\UnderwaterProtocol.ssy,4)*/
+endsystem UnderwaterProtocol;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk,4)*/
+block Master_Node;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),164(32,70))*/
+signalroute /*#E*/ 
+MasterSide from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),125(85,70))*/
+Master to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),104(15,15))*/
+env with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),165(17,82))*/
+BcReq,
+BcReq2;
+from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),104(15,15))*/
+env to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),125(85,70))*/
+Master with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),166(70,82))*/
+AckMsg;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),185(102,145))*/
+signalroute /*#E*/ 
+EnviSide from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),104(15,15))*/
+env to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),125(85,70))*/
+Master with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),186(102,92))*/
+sStart;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),125(85,70))*/
+process /*#E*/ 
+Master (1,1) referenced;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),170(7,77))*/
+connect /*#E*/ 
+C1 and 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),164(32,70))*/
+MasterSide;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),191(97,217))*/
+connect /*#E*/ 
+Envi and 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk(1),185(102,145))*/
+EnviSide;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master_Node.sbk,4)*/
+endblock Master_Node;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr,4)*/
+process Master;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),128(35,5))*/
+DCL
+q          Req,
+a          Response,
+q2         Req2,
+index     Integer,
+nodes    No_Nodes;
+
+TIMER T1;
+
+SYNONYM d duration = 5;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),659(105,10))*/
+DCL
+distance    NATURAL,
+Trandom    INTEGER,
+Tdelay       INTEGER;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),1160(15,50))*/
+start /*#E*/ 
+;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),1163(15,65))*/
+decision /*#E*/ 
+index;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),1172(12,77))*/
+(<=nodes):
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),1169(15,85))*/
+create /*#E*/ 
+ManyNodes;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),1181(5,100))*/
+task /*#E*/ 
+a (index) := Timeprint,
+a (index) := OFFSPRING,
+index := index +1;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),1193(15,125))*/
+nextstate /*#E*/ 
+IDLE;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),1190(52,77))*/
+else:
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),1187(40,85))*/
+nextstate /*#E*/ 
+-;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),1163(15,65))*/
+enddecision;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),632(133,25))*/
+state /*#E*/ 
+WAITING;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),635(128,40))*/
+input /*#E*/ 
+AckMsg (a);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),662(113,55))*/
+task {/*#E*/ 
+for (distance := 5, , distance+50)
+Tdelay := 2*distance / 1500 + Trandom;};
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),641(128,75))*/
+decision /*#E*/ 
+d<Tdelay and
+index < nodes;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),689(180,92))*/
+(FALSE):
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),686(168,100))*/
+nextstate /*#E*/ 
+WAITING;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),971(135,97))*/
+(TRUE):
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),968(135,105))*/
+create /*#E*/ 
+ManyNodes;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),842(130,120))*/
+task /*#E*/ 
+q2!numbe := SELF;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),848(125,140))*/
+task /*#E*/ 
+q2!zeiten!hrs := 23,
+q2!zeiten!mins := 59,
+q2!zeiten!secs := 59;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),866(125,165))*/
+task /*#E*/ 
+q2!mask := PARENT;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),872(135,180))*/
+output /*#E*/ 
+BcReq (q2);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),878(135,195))*/
+/*#E*/ 
+RESET (T1);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),890(135,210))*/
+nextstate /*#E*/ 
+TIMECALC;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),641(128,75))*/
+enddecision;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),632(133,25))*/
+endstate;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),413(70,45))*/
+state /*#E*/ 
+IDLE;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),416(70,60))*/
+input /*#E*/ 
+sStart;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),578(70,75))*/
+task {/*#E*/ 
+q!num := SELF;};
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),584(65,90))*/
+task /*#E*/ 
+q!zeit!hrs := 23,
+q!zeit!mins := 58,
+q!zeit!secs := 50
+;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),422(70,110))*/
+output /*#E*/ 
+BcReq(q);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),461(65,130))*/
+/*#E*/ 
+SET (now+d, T1);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),452(70,150))*/
+nextstate /*#E*/ 
+WAITING;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(1),413(70,45))*/
+endstate;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(2),1139(35,25))*/
+state /*#E*/ 
+TIMECALC;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr(2),1139(35,25))*/
+endstate;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\Master1.spr,4)*/
+endprocess Master;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk,4)*/
+block SeveralNodes;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),140(75,25))*/
+SYNONYM No_Nodes NATURAL = 100;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),119(32,72))*/
+signalroute /*#E*/ 
+ManyNodesSide from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),116(70,70))*/
+ManyNodes to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),104(15,15))*/
+env with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),120(17,82))*/
+AckMsg;
+from 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),104(15,15))*/
+env to 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),116(70,70))*/
+ManyNodes with 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),121(57,82))*/
+BcReq,
+BcReq2;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),116(70,70))*/
+process /*#E*/ 
+ManyNodes (1,No_Nodes) referenced;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),125(7,77))*/
+connect /*#E*/ 
+C1 and 
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk(1),119(32,72))*/
+ManyNodesSide;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\nNodes.sbk,4)*/
+endblock SeveralNodes;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr,4)*/
+process ManyNodes;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),128(55,5))*/
+DCL 
+respMsg       Response,
+paramReq     Req,
+paramReq2   Req2;
+
+TIMER T2;
+
+SYNONYM dur duration = 4;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),224(140,15))*/
+DCL
+distance    NATURAL,
+dur            INTEGER;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),155(5,40))*/
+start /*#E*/ 
+;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),158(5,55))*/
+nextstate /*#E*/ 
+READY;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),119(50,40))*/
+state /*#E*/ 
+READY;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),131(40,55))*/
+input /*#E*/ 
+BcReq(paramReq);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),182(40,75))*/
+task /*#E*/ 
+respMsg!numb := SELF;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),188(40,95))*/
+task /*#E*/ 
+respMsg!zeite!hrs    := 23,
+respMsg!zeite!mins   := 59,
+respMsg!zeite!secs    := 59;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),194(35,115))*/
+output /*#E*/ 
+AckMsg (respMsg) to PARENT;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),218(35,130))*/
+task {/*#E*/ 
+for (distance := 5, , distance+50)
+dur := 2*distance / 1500;};
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),170(45,145))*/
+/*#E*/ 
+SET (NOW+dur, T2);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),149(50,165))*/
+nextstate /*#E*/ 
+WARTE;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),176(100,55))*/
+input /*#E*/ 
+BcReq2(paramReq2);
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),212(105,75))*/
+decision /*#E*/ 
+q2!numbe;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),260(97,87))*/
+(SELF):
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),257(90,95))*/
+nextstate /*#E*/ 
+WARTE;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),254(147,87))*/
+(NOT SELF):
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),251(135,95))*/
+task /*#E*/ 
+'';
+***** Unexpected end of flow *****
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),212(105,75))*/
+enddecision;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr(1),119(50,40))*/
+endstate;
+/*#SDTREF(SDL,C:\Users\jnjoroge\Documents\GitHub\NewThesis\ManyNodes.spr,4)*/
+endprocess ManyNodes;
