@@ -1,9 +1,17 @@
 SDT-SYSTEM-6.3
 [DRIVES]
 [SOURCE-TARGET-DIRECTORY]
+[LINKS]
+Endpoints=""
+File=untitled.sli
 [DIAGRAMS]
 0 23 UnderwaterProtocol %unconnected% 0 0 0 ""
-0 1 UnderwaterProtocol UnderwaterProtocol.ssy 0 1529489965 UnderwaterProtocol ""
+0 34 Req1 DataComm.asn 0 1530213550 DataComm ""
+0 1 UnderwaterProtocol UnderwaterProtocol.ssy 0 1531645247 UnderwaterProtocol ""
+1 2 Master_Node Master_Node.sbk 0 1531309394 M ""
+2 5 Master Master1.spr 8 1531830377 M1 ""
+1 2 SeveralNodes nNodes.sbk 0 1531309378 n ""
+2 5 ManyNodes ManyNodes.spr 0 1531648639 M2 ""
 0 23 "Other Documents" %unconnected% 0 0 0 ""
 [VIEWOPTIONS]
 ShowDirectories=True
@@ -36,6 +44,7 @@ IndexAppearance=Detailed
 DuplicateFile=
 [MAKEOPTIONS]
 CCompilerDriver=False
+Kernel=SCTAMDEBCOM
 [PRINTOPTIONS]
 DestinationFormat=PSFile
 FirstPageNo=1
